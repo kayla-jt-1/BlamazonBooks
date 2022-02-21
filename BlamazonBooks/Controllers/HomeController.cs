@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 
 namespace BlamazonBooks.Controllers
 {
+    
     public class HomeController : Controller
     {
-        private BookstoreContext context { get; set; }
-        public HomeController (BookstoreContext temp)
+        private IBlamazonBooksRepository repo;
+        public HomeController (IBlamazonBooksRepository temp)
         {
-            context = temp;
+            repo = temp;
         }
         public IActionResult Index()
         {
-            var blah = context.Books.ToList();
+            var blah = repo.Books.ToList();
             return View(blah);
         }
     }

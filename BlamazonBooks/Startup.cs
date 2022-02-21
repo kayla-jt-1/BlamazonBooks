@@ -31,6 +31,7 @@ namespace BlamazonBooks
            {
                options.UseSqlite(Configuration["ConnectionStrings:BookstoreConnection"]);
            });
+            services.AddScoped<IBlamazonBooksRepository, EFBlamazonBooksRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
