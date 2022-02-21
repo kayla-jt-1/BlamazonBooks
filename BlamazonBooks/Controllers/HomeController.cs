@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BlamazonBooks.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,15 @@ namespace BlamazonBooks.Controllers
 {
     public class HomeController : Controller
     {
+        private BookstoreContext context { get; set; }
+        public HomeController (BookstoreContext temp)
+        {
+            context = temp;
+        }
         public IActionResult Index()
         {
-            return View();
+            var blah = context.Books.ToList();
+            return View(blah);
         }
     }
 }

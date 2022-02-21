@@ -29,7 +29,7 @@ namespace BlamazonBooks
             services.AddControllersWithViews();
             services.AddDbContext<BookstoreContext>(options =>
            {
-               options.UseSqlite(Configuration["ConnectionString:BookstoreConnection"]);
+               options.UseSqlite(Configuration["ConnectionStrings:BookstoreConnection"]);
            });
         }
 
