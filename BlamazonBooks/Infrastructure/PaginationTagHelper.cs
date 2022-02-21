@@ -37,14 +37,15 @@ namespace BlamazonBooks.Infrastructure
             {
                 TagBuilder tb = new TagBuilder("a");
 
-                tb.Attributes['href'] = uh.Action(PageAction, new {pageNum = i));
-            T   tb.InnerHtml.Append(i.ToString());
+                tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i });
+                tb.InnerHtml.Append(i.ToString());
                
                 final.InnerHtml.AppendHtml(tb);
 
             }
 
-        TagHelperOutput.Context.Append(Html5DateRenderingMode(final.InnerHtml))
+            tho.Content.AppendHtml(final.InnerHtml);
+                    
         }
     }
 }
