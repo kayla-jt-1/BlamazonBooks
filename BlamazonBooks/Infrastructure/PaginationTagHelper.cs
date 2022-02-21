@@ -27,6 +27,13 @@ namespace BlamazonBooks.Infrastructure
 
         public PageInfo PageModel { get; set; }
         public string PageAction { get; set; }
+
+        //bootstrap things
+        public bool PageClassesEnabled { get; set; } = false;
+        public string PageClass { get; set; }
+        public string PageClassNprmal { get; set; }
+        public string PageClassSelected { get; set; }
+
         //Override the template
         public override void Process (TagHelperContext thc, TagHelperOutput tho)
         {
@@ -38,6 +45,14 @@ namespace BlamazonBooks.Infrastructure
                 TagBuilder tb = new TagBuilder("a");
 
                 tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i });
+                
+                //bootstrap
+                if (PageClassesEnabled)
+                {
+                    tb.AddCssClass(PageClass);
+                    tb.AddCssClass(i == PageModel.CurrentPage ? PageClassSelected : PageClassNprmal);
+                }
+                
                 tb.InnerHtml.Append(i.ToString());
                
                 final.InnerHtml.AppendHtml(tb);
