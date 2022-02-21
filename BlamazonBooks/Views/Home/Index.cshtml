@@ -1,7 +1,7 @@
 ﻿@{
 }
 
-@model List<Book>
+@model IQueryable<Book>
 
 @foreach (Book b in Model)
     {
@@ -19,3 +19,6 @@
 
         <br />
     }
+<a asp-action="Index" asp-route-pageNum="1">1</a>
+<a asp-action="Index" asp-route-pageNum="2">2</a>
+<a asp-action="Index" asp-route-pageNum="3">3</a>
