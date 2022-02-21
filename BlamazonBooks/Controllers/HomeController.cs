@@ -1,4 +1,5 @@
 ﻿using BlamazonBooks.Models;
+using BlamazonBooks.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,11 +19,23 @@ namespace BlamazonBooks.Controllers
         public IActionResult Index(int pageNum = 1)
         {
             int pageSize = 5;
-            var blah = repo.Books
+
+            var x = new BooksViewModel
+            {
+                Books = repo.Books
                 .OrderBy(t => t.Title)
                 .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize);
-            return View(blah);
+                .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    TotalNumBooks = repo.Books.Count(),
+                    BooksPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+            };
+
+            return View(x);
         }
     }
 }
