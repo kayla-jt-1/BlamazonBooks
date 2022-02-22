@@ -11,7 +11,7 @@ using BlamazonBooks.Models.ViewModels;
 
 namespace BlamazonBooks.Infrastructure
 {
-    [HtmlTargetElement("div", Attributes = "page-Model")]
+    [HtmlTargetElement("div", Attributes = "page-model")]
     public class PaginationTagHelper : TagHelper
     {
         //Dynamically create the page links for us
