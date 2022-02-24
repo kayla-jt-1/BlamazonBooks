@@ -40,7 +40,7 @@ namespace BlamazonBooks.Infrastructure
             IUrlHelper uh = uhf.GetUrlHelper(vc);
             TagBuilder final = new TagBuilder("div");
 
-            for (int i = 1; i < PageModel.TotalPages; i++)
+            for (int i = 1; i <= PageModel.TotalPages; i++) //I changed this to <= but check it if it throws an error 
             {
                 TagBuilder tb = new TagBuilder("a");
 
