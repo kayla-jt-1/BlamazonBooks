@@ -1,11 +1,17 @@
 ﻿
 @model IEnumerable<string>
 
-<!--Link to Home-->
-<a asp-controller="Home" asp-action="Index"asp-route-Category="@Model">Home</a>
+<div>
+    <h5>Sort by category: </h5>
+</div>
 
-<!--Dynamically create links for each category-->
-@foreach (string t in Model)
+    <!--Link to Home, default to the first page-->
+    <a asp-controller="Home" asp-action="Index" asp-route-Category="" asp-route-pageNum ="1" 
+       class="btn-block btn-outline-secondary">Home</a>
+
+    <!--Dynamically create links for each category, default to the first page-->
+    @foreach (string t in Model)
     {
-        <a asp-controller="Home" asp-action="Index" asp-route-Category="@t">@t</a>
+        <a asp-controller="Home" asp-action="Index" asp-route-Category="@t" asp-route-pageNum ="1" 
+           class="btn-block @(ViewBag.SelectedType == t ? "btn-primary" : "btn-outline-secondary")">@t</a>
     }

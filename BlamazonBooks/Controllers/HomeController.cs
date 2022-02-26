@@ -30,7 +30,10 @@ namespace BlamazonBooks.Controllers
 
                 PageInfo = new PageInfo
                 {
-                    TotalNumBooks = repo.Books.Count(),
+                    TotalNumBooks =
+                        (category == null
+                            ? repo.Books.Count()
+                            : repo.Books.Where(x => x.Category == category).Count()),
                     BooksPerPage = pageSize,
                     CurrentPage = pageNum
                 }

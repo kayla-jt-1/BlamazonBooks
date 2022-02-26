@@ -48,13 +48,28 @@ namespace BlamazonBooks
 
             app.UseEndpoints(endpoints =>
             {
-                // URL when the user enters a page number and a category
+
+                // URL when the user enters a page number and a category  
+                endpoints.MapControllerRoute(
+                    name: "typepage",
+                    pattern: "{Category}/Page{pageNum}",
+                    defaults: new { controller = "home", action = "Index" });
+
+                // URL when the user enters just a page number
                 endpoints.MapControllerRoute(
                     name: "Paging",
                     pattern: "Page{pageNum}",
-                    defaults: new { controller = "Home", action = "Index" });
+                    defaults: new { controller = "Home", action = "Index", pageNum = 1 });
 
+                // URL when the user enters just a category 
+                endpoints.MapControllerRoute(
+                    name: "type",
+                    pattern: "{Category}",
+                    defaults: new { controller = "home", action = "Index", pageNum = 1 });
+
+                // URL when the user enters nothing 
                 endpoints.MapDefaultControllerRoute();
+
             });
         }
     }
