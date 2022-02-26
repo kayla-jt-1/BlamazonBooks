@@ -31,7 +31,7 @@ namespace BlamazonBooks.Infrastructure
         //bootstrap things
         public bool PageClassesEnabled { get; set; } = false;
         public string PageClass { get; set; }
-        public string PageClassNprmal { get; set; }
+        public string PageClassNormal { get; set; }
         public string PageClassSelected { get; set; }
 
         //Override the template
@@ -50,7 +50,7 @@ namespace BlamazonBooks.Infrastructure
                 if (PageClassesEnabled)
                 {
                     tb.AddCssClass(PageClass);
-                    tb.AddCssClass(i == PageModel.CurrentPage ? PageClassSelected : PageClassNprmal);
+                    tb.AddCssClass(i == PageModel.CurrentPage ? PageClassSelected : PageClassNormal);
                 }
                 
                 tb.InnerHtml.Append(i.ToString());

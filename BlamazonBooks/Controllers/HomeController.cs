@@ -16,13 +16,14 @@ namespace BlamazonBooks.Controllers
         {
             repo = temp;
         }
-        public IActionResult Index(int pageNum = 1)
+        public IActionResult Index(string category, int pageNum = 1)
         {
             int pageSize = 5;
 
             var x = new BooksViewModel
             {
                 Books = repo.Books
+                .Where(t => t.Category == category || category == null)
                 .OrderBy(t => t.Title)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
