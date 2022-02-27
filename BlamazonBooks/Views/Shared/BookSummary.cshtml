@@ -15,5 +15,12 @@
     <div class="card-text p-1">@Model.Classification</div>
     <div class="card-text p-1">@Model.Category</div>
     <div class="card-text p-1">@Model.PageCount</div>
+
+    <form method="post" asp-page="/Checkout">
+        <input type="hidden" asp-for="@Model.BookId" />
+        <span class="card-text">
+            <button type="submit" class="btn btn-success btn-sm float-right">Add to cart</button>
+        </span>
+    </form>
 </div>
 <br />

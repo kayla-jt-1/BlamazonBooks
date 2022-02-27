@@ -32,6 +32,7 @@ namespace BlamazonBooks
                options.UseSqlite(Configuration["ConnectionStrings:BookstoreConnection"]);
            });
             services.AddScoped<IBlamazonBooksRepository, EFBlamazonBooksRepository>();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,6 +70,8 @@ namespace BlamazonBooks
 
                 // URL when the user enters nothing 
                 endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
 
             });
         }
