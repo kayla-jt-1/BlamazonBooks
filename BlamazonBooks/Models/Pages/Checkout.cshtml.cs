@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlamazonBooks.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -18,15 +19,21 @@ namespace BlamazonBooks.Models.Pages
             repo = temp;
         }
         public Basket basket { get; set; }
-        public void OnGet(Basket b)
+        public void OnGet()
         {
-            basket = b;
+            basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
         }
         public IActionResult OnPost(int bookId)
         {
             Book b = repo.Books.FirstOrDefault(x => x.BookId == bookId);
+
+            // if basket already exists, load the data. If not, create a new basket
+            basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
             basket.AddItem(b, 1);
-            return RedirectToPage(basket);
+
+            HttpContext.Session.SetJson("basket", basket);
+
+            return RedirectToPage();
 ;       }
     }
 }

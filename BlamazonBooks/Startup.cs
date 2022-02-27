@@ -33,6 +33,8 @@ namespace BlamazonBooks
            });
             services.AddScoped<IBlamazonBooksRepository, EFBlamazonBooksRepository>();
             services.AddRazorPages();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +47,9 @@ namespace BlamazonBooks
                 app.UseDeveloperExceptionPage();
             }
 
+            // Corresponds to the wwwroot
+            app.UseStaticFiles();
+            app.UseSession(); //store ints strings or bytes
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
