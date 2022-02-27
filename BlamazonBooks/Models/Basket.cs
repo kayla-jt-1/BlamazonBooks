@@ -28,8 +28,12 @@ namespace BlamazonBooks.Models
                 line.Quantity += qty;
             }
         }
+        public double CalculateTotal()
+        {
+            double sum = Items.Sum(x => x.Quantity * 25); // Multiply by the price, set this to be dynamic
+                return sum;
+        }
     }
-
     public class BasketLineItem
     {
         public int LineID { get; set; }

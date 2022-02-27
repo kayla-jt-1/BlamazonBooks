@@ -9,8 +9,24 @@ namespace BlamazonBooks.Models.Pages
 {
     public class CheckoutModel : PageModel
     {
-        public void OnGet()
+        // pull in data
+        private IBlamazonBooksRepository repo { get; set; }
+        
+        // constructor loads the data
+        public CheckoutModel (IBlamazonBooksRepository temp)
         {
+            repo = temp;
         }
+        public Basket basket { get; set; }
+        public void OnGet(Basket b)
+        {
+            basket = b;
+        }
+        public IActionResult OnPost(int bookId)
+        {
+            Book b = repo.Books.FirstOrDefault(x => x.BookId == bookId);
+            basket.AddItem(b, 1);
+            return RedirectToPage(basket);
+;       }
     }
 }
