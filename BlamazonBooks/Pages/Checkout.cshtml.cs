@@ -18,12 +18,17 @@ namespace BlamazonBooks.Models.Pages
         {
             repo = temp;
         }
+
         public Basket basket { get; set; }
+        public string ReturnUrl { get; set; }
         public void OnGet()
         {
+            // the URL to get back to where we were
+            ReturnUrl = ReturnUrl ?? "/";
             basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
         }
-        public IActionResult OnPost(int bookId)
+
+        public IActionResult OnPost(int bookId, string returnUrl)
         {
             Book b = repo.Books.FirstOrDefault(x => x.BookId == bookId);
 
@@ -33,7 +38,7 @@ namespace BlamazonBooks.Models.Pages
 
             HttpContext.Session.SetJson("basket", basket);
 
-            return RedirectToPage();
+            return RedirectToPage(new { ReturnUrl = returnUrl});
 ;       }
     }
 }

@@ -30,8 +30,8 @@ namespace BlamazonBooks.Models
         }
         public double CalculateTotal()
         {
-            double sum = Items.Sum(x => x.Quantity * 25); // Multiply by the price, set this to be dynamic
-                return sum;
+            double sum = Items.Sum(x => x.Quantity * x.Book.Price); 
+            return sum;
         }
     }
     public class BasketLineItem

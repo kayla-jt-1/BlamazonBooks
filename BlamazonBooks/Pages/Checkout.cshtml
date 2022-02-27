@@ -3,6 +3,7 @@
 @{
 }
 
+<!--Creates a Table that holds the cart information-->
 <h2>Your Basket</h2>
 <table class="table table-bordered table-striped">
     <thead>
@@ -25,6 +26,7 @@
         </tr>
             }
     </tbody>
+
     <tfoot>
         <tr>
             <td colspan="3">Total:</td>
@@ -34,3 +36,8 @@
         </tr>
     </tfoot>
 </table>
+
+<!--Go back-->
+<div>
+    <a class="btn btn-primary" href="@Model.ReturnUrl">Back to browsing</a>
+</div>

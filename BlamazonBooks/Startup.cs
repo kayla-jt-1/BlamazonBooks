@@ -49,7 +49,7 @@ namespace BlamazonBooks
 
             // Corresponds to the wwwroot
             app.UseStaticFiles();
-            app.UseSession(); //store ints strings or bytes
+            app.UseSession(); //stores ints strings or bytes
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
