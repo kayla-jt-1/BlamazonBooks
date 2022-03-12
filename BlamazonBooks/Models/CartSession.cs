@@ -7,5 +7,6 @@ namespace BlamazonBooks.Models
 {
     public class CartSession
     {
+        //I am so sad
     }
 }
