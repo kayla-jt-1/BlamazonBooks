@@ -10,7 +10,7 @@ namespace BlamazonBooks.Models
         // Declare and initialize 
         public List<BasketLineItem> Items { get; set; } = new List<BasketLineItem>();
         
-        public void AddItem(Book bk, int qty)
+        public virtual void AddItem(Book bk, int qty)
         {
             BasketLineItem line = Items
                 .Where(b => b.Book.BookId == bk.BookId)
@@ -28,7 +28,17 @@ namespace BlamazonBooks.Models
                 line.Quantity += qty;
             }
         }
-        public double CalculateTotal()
+
+        public virtual void RemoveItem(Book book)
+        {
+            Items.RemoveAll(x => x.Book.BookId == book.BookId);
+        }
+
+        public virtual void ClearAll()
+        {
+            Items.Clear();
+        }
+        public virtual double CalculateTotal()
         {
             double sum = Items.Sum(x => x.Quantity * x.Book.Price); 
             return sum;

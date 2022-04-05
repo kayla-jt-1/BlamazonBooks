@@ -35,6 +35,8 @@ namespace BlamazonBooks
             services.AddRazorPages();
             services.AddDistributedMemoryCache();
             services.AddSession();
+            services.AddScoped<Basket>(x => CartSession.GetBasket(x));
+            services.AddSingleton<HttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

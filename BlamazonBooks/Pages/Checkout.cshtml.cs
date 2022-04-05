@@ -25,18 +25,13 @@ namespace BlamazonBooks.Models.Pages
         {
             // the URL to get back to where we were
             ReturnUrl = ReturnUrl ?? "/";
-            basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
         }
 
         public IActionResult OnPost(int bookId, string returnUrl)
         {
             Book b = repo.Books.FirstOrDefault(x => x.BookId == bookId);
 
-            // if basket already exists, load the data. If not, create a new basket
-            basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
             basket.AddItem(b, 1);
-
-            HttpContext.Session.SetJson("basket", basket);
 
             return RedirectToPage(new { ReturnUrl = returnUrl});
 ;       }
