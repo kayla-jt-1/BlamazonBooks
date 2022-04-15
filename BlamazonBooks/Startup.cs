@@ -1,3 +1,5 @@
+using Amazon;
+using Amazon.SecretsManager;
 using BlamazonBooks.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +39,18 @@ namespace BlamazonBooks
             services.AddSession();
             services.AddScoped<Basket>(x => CartSession.GetBasket(x));
             services.AddSingleton<HttpContextAccessor, HttpContextAccessor>();
+
+            // Cookie Policy Options
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            // AWS Secrets Manager
+            services.AddScoped<IAmazonSecretsManager>(a =>
+             new AmazonSecretsManagerClient(RegionEndpoint.USEast1)
+   );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +67,7 @@ namespace BlamazonBooks
             app.UseStaticFiles();
             app.UseSession(); //stores ints strings or bytes
             app.UseRouting();
+            app.UseCookiePolicy();
 
             app.UseEndpoints(endpoints =>
             {

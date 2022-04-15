@@ -16,6 +16,11 @@ namespace BlamazonBooks.Controllers
         {
             repo = temp;
         }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
         public IActionResult Index(string category, int pageNum = 1)
         {
             int pageSize = 5;
