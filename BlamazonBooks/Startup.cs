@@ -38,36 +38,20 @@ namespace BlamazonBooks
             services.AddDistributedMemoryCache();
             services.AddSession();
             services.AddScoped<Basket>(x => CartSession.GetBasket(x));
-            services.AddSingleton<HttpContextAccessor, HttpContextAccessor>();
-
-            // Cookie Policy Options
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
-            // AWS Secrets Manager
-            services.AddScoped<IAmazonSecretsManager>(a =>
-             new AmazonSecretsManagerClient(RegionEndpoint.USEast1)
-   );
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseStaticFiles();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
             // Corresponds to the wwwroot
             app.UseStaticFiles();
             app.UseSession(); //stores ints strings or bytes
             app.UseRouting();
-            app.UseCookiePolicy();
 
             app.UseEndpoints(endpoints =>
             {

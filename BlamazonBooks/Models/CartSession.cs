@@ -11,15 +11,17 @@ namespace BlamazonBooks.Models
 {
     public class CartSession : Basket
     {
-        public static Basket GetBasket(IServiceProvider services)
+        public static Basket GetBasket (IServiceProvider services)
         {
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
             CartSession cart = session?.GetJson<CartSession>("Basket") ?? new CartSession();
-            //Basket.Session = session;
+            cart.Session = session;
             return cart;
         }
-        [JsonIgnore]
+
+        [JsonIgnore] //prevents a property from being serialized or deserialiazed
         public ISession Session { get; set; }
+
         public override void AddItem(Book book, int qty)
         {
             base.AddItem(book, qty);
